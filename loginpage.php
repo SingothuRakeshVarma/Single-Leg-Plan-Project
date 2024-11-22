@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
 session_start();
 
 // Query to select user data
-$query = "SELECT * FROM users WHERE userid='$username' AND password='$password'";
+$query = "SELECT * FROM user_data WHERE user_id='$username' AND password='$password'";
 $result = mysqli_query($con, $query);
 
 // Check if user exists
@@ -21,10 +21,9 @@ if (mysqli_num_rows($result) > 0) {
     $user = mysqli_fetch_assoc($result);
 
     // Store data in the session
-    $_SESSION['userid'] = $user['userid'];
-    $_SESSION['username'] = $user['username'];
-    $_SESSION['email'] = $user['email'];
-    $_SESSION['phonenumber'] = $user['phonenumber'];
+    $_SESSION['user_id'] = $user['user_id'];
+    $_SESSION['user_name'] = $user['user_name'];
+    $_SESSION['phone_number'] = $user['phone_number'];
     $_SESSION['referalid'] = $user['referalid'];
     $_SESSION['referalname'] = $user['referalname'];
     $_SESSION['images'] = $user['images'];

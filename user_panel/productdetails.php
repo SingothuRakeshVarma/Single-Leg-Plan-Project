@@ -1,6 +1,7 @@
 <?php
 // Connect to the database
-$conn = new mysqli("localhost", "trcelioe_realvisinewebsite", "Realvisine", "trcelioe_user_data");
+$conn = mysqli_connect("localhost", "root", "", "success_slp");
+// $conn = new mysqli("localhost", "trcelioe_realvisinewebsite", "Realvisine", "trcelioe_user_data");
 
 // Check connection
 if ($conn->connect_error) {
@@ -11,7 +12,7 @@ if ($conn->connect_error) {
 $q = filter_input(INPUT_GET, 'q', FILTER_SANITIZE_STRING);
 
 // Prepare SQL query
-$sql = "SELECT DISTINCT * FROM cartdata WHERE packagename = ? AND packageorproduct = 'package'";
+$sql = "SELECT DISTINCT * FROM floor_master WHERE floor_name = ?";
 
 // Prepare statement
 $stmt = $conn->prepare($sql);
@@ -31,14 +32,10 @@ $productDetails = array();
 // Loop through the rows and display the data
 foreach ($rows as $row) {
     $productDetails[] = array(
-        'packageamount' => $row['dp'],
-        'cashbackamount' => $row['cashbackamount'],
-        'packagealgibulity' => $row['packagealgibulity'],
-        'productcode' => $row['productcode'],
-        'type' => $row['packageorproduct'],
-        'product_cashback_amount' => $row['cashbackamount'],
-        'product_amount' => $row['dp'],
-        'product_name' => $row['packagename']
+        'flooramount' => $row['total'],
+        'flooralgibulity' => $row['validity_days'],
+        'productcode' => $row['floor_id'],
+
     );
 }
 

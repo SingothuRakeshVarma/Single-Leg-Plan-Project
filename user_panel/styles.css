@@ -1,0 +1,726 @@
+body {
+   background-color: black
+
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Gowun+Batang:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Sofadi+One&display=swap');
+
+.container_head {
+    background-color: rgb(2, 36, 56);
+    width: 100%;
+    height: 100px;
+    padding: 5px 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profile_imag {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+
+    z-index: 1;
+
+    /* Key change! */
+}
+
+.username {
+    margin: 0%;
+    width: 100%;
+    color: white;
+    font-size: 4vw;
+    font-family: ital;
+}
+
+.logo_img {
+    width: 150px;
+}
+
+.hi {
+    font-size: 15px;
+    position: relative;
+    top: 13px;
+    left: 10px;
+}
+
+.user_details {
+
+    padding: 30px 0;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: 15px;
+}
+
+.all_items {
+    background-color: black;
+    text-align: center;
+    color: darkcyan;
+}
+
+.income_act {
+    height: 80px;
+    width: 160px;
+    border-radius: 9px;
+    background-color: rgb(19, 29, 41);
+    text-align: center;
+    margin: 8px;
+}
+
+.word_inc {
+    font-size: 20px;
+    position: relative;
+    top: 14px;
+    color: darkgreen;
+    font-weight: bold;
+}
+
+.reff_btn {
+    color: midnightblue;
+    font-weight: bold;
+    padding: 0 130px;
+    margin: 0 0 10px 0;
+    border-radius: 10px;
+    height: 35px;
+    background-image: url(../images/panoramic-texture-of-realistic-multi-colored-watercolor-on-a-white-background-vector.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bot_nav {
+    background-color: rgb(19, 29, 41);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 30px;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+.icone_name {
+    font-size: 10px;
+    color: white;
+}
+
+.hyer_icon {
+
+    font-size: 37px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.hyer_icon>div {
+    flex-basis: 25%;
+    margin: 30px 0;
+}
+
+.icon_names {
+    font-size: 17px;
+    color: green;
+    font-family: Gowun;
+
+}
+
+.icon_style {
+    color: skyblue;
+    padding: 12px 15px;
+    border-radius: 50%;
+    background-color: rgb(19, 29, 41);
+}
+
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+    /* styles for PC */
+    .container_head {
+        background-color: rgb(2, 36, 56);
+        width: 100%;
+        height: 130px;
+        padding: 5px 20px;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .profile_imag {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        z-index: 1;
+        padding: 0;
+        /* Key change! */
+    }
+
+    .username {
+        margin: 0;
+        padding: 0;
+        color: white;
+
+        font-size: 40px;
+        font-family: ital;
+
+
+    }
+
+    .logo_img {
+        width: 300px;
+    }
+
+    .hi {
+        font-size: 20px;
+        position: relative;
+        top: 25px;
+        left: 10px;
+
+    }
+
+    .user_details {
+        background-color: black;
+        padding: 30px 0;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .income_act {
+        height: 110px;
+        width: 175px;
+        border-radius: 9px;
+        background-color: rgb(19, 29, 41);
+        text-align: center;
+    }
+
+    .reff_btn {
+        color: midnightblue;
+        font-weight: bold;
+        padding: 0 330px;
+        margin: 0 0 10px 0;
+        border-radius: 10px;
+        height: 35px;
+        background-image: url(../images/panoramic-texture-of-realistic-multi-colored-watercolor-on-a-white-background-vector.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .bot_nav {
+        background-color: rgb(19, 29, 41);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        font-size: 25px;
+
+    }
+
+    .icone_name {
+        font-size: 10px;
+        color: white;
+    }
+
+    .hyer_icon {
+        font-size: 55px;
+    }
+
+    .hyer_icon {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+    }
+
+    .hyer_icon>div {
+        flex-basis: 25%;
+    }
+
+    .icon_style {
+        color: skyblue;
+        padding: 10px 20px;
+        border-radius: 50%;
+        background-color: rgb(19, 29, 41);
+    }
+
+
+
+}
+
+a:is(:link, :active, :visited).active {
+    color: greenyellow;
+}
+
+.promo_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+
+
+.promo_usdt {
+    font-size: 25px;
+    color: green;
+}
+
+.container_promo {
+    background-color: black;
+    color: white;
+
+}
+
+.promo_funds {
+    background-color: rgb(19, 29, 41);
+    margin: 0 30px;
+    border-radius: 10px;
+    padding: 2px 21px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.promo_amount {
+    font-size: 30px;
+    color: green;
+}
+
+.usdt_promo {
+    font-size: 15px;
+    position: relative;
+    left: 5px;
+    color: green;
+}
+
+.promo_viewbtn {
+    position: relative;
+    top: 40px;
+    background-image: url(../images/panoramic-texture-of-realistic-multi-colored-watercolor-on-a-white-background-vector.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    border-radius: 19px;
+    color: blue;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    width: 90%;
+    background-color: white;
+    margin: 0 20px 10px 20px;
+}
+.promo_rev {
+    background-color: rgb(19, 29, 41);
+    padding: 25px 50px;
+    text-align: center;
+    margin: 5px;
+    border-radius: 10px;
+}
+@media only screen and (min-width: 768px) {
+    .promo_rev {
+        background-color: rgb(19, 29, 41);
+        padding: 25px 120px;
+        text-align: center;
+        margin: 5px;
+        border-radius: 10px;
+    }
+
+
+
+    .promo_amount {
+        font-size: 30px;
+        color: green;
+    }
+
+    .usdt_promo {
+        font-size: 15px;
+        position: relative;
+        left: 5px;
+        color: green;
+    }
+
+    .promo_team {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px 0;
+        background: rgb(77, 17, 10);
+        background: linear-gradient(70deg, rgba(77, 17, 10, 1) 0%, rgba(22, 13, 52, 1) 100%);
+    }
+
+
+
+}
+
+.promo_repbtn {
+    border: solid 2px white;
+    background-color: transparent;
+    color: white;
+    padding: 10px 20px;
+}
+
+.promo_team {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 20px 25px 38px 25px;
+
+    background: rgb(77, 17, 10);
+    background: linear-gradient(70deg, rgba(77, 17, 10, 1) 0%, rgba(22, 13, 52, 1) 100%);
+}
+
+.promo_container2 {
+    background-color: black;
+    border-radius: 15px;
+    position: relative;
+    bottom: 35px;
+    color: white;
+}
+
+.promo_users {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+
+}
+
+.promo_leve1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.promo_lvldetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.promo_inerlveldetails {
+
+    text-align: center;
+}
+
+.promo_count {
+    font-size: 25px;
+    color: green;
+    font-weight: bold;
+}
+
+/* wallet-css */
+
+.wall_btns {
+    width: 80%;
+    height: 90px;
+    background-color: rgb(19, 29, 41);
+    border-radius: 10px;
+}
+
+.button_1 {
+    width: 45%;
+    height: 50px;
+    position: relative;
+    top: 20px;
+    left: 3px;
+    border: solid 2px darkcyan;
+    background-color: darkcyan;
+    color: white;
+}
+
+.button_2 {
+    width: 45%;
+    height: 50px;
+    position: relative;
+    top: 20px;
+    left: -2px;
+    border: solid 2px darkcyan;
+    color: white;
+    background-color: transparent;
+}
+
+.wall_balance {
+    width: 85%;
+    color: white;
+    text-align: center;
+    background-color: rgb(19, 29, 41);
+    margin: 10px 0;
+    border-radius: 10px;
+    border: solid 2px darkcyan;
+}
+
+.wall_titels {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+
+}
+
+.wall_amount {
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+    color: green;
+    position: relative;
+    top: -20px;
+    left: 20px;
+    font-weight: bold;
+}
+
+
+
+
+/* profile */
+.pro_container {
+    width: 98%;
+    margin: 5px 10px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+}
+
+.pro_account_data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 40px;
+
+}
+
+.pro_acct {
+    padding: 10px 40px;
+}
+
+
+.prof_container {
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+.prof_profh1 {
+    font-size: 30px;
+    width: 100%;
+    background-color: lightseagreen;
+}
+
+.prof_text {
+    font-size: 20px;
+    width: 80%;
+    border: solid 2px transparent;
+    background-color: rgb(19, 29, 41);
+    border-radius: 5px;
+    color: white;
+}
+
+.prof_text:hover {
+    font-size: 20px;
+    width: 80%;
+    border: solid 2px lightseagreen;
+    background-color: rgb(19, 29, 41);
+    border-radius: 5px;
+    color: white;
+}
+
+input[type="text"] {
+    text-align: center;
+    color: greenyellow;
+}
+
+input[type="text"]:hover {
+    text-align: center;
+    color: lightseagreen;
+}
+
+.image-preview {
+    width: 250px;
+    height: 200px;
+}
+
+.prof_file {
+    background-color: transparent;
+    color: white;
+}
+
+#image-input {
+    /* Add some basic styling to the input field */
+    width: 200px;
+    /* adjust the width to your needs */
+    height: 55px;
+    /* adjust the height to your needs */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the "Choose file" button */
+#image-input::-webkit-file-upload-button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#image-input::-moz-file-upload-button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    background-color: transparent;
+    color: lightseagreen;
+}
+
+/* password page */
+
+.prof_container {
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+.prof_profh1 {
+    font-size: 30px;
+    width: 100%;
+    background-color: lightseagreen;
+}
+
+.prof_text {
+    font-size: 20px;
+    width: 80%;
+    border: solid 2px transparent;
+    background-color: rgb(19, 29, 41);
+    border-radius: 5px;
+    color: white;
+}
+
+.prof_text:hover {
+    font-size: 20px;
+    width: 80%;
+    border: solid 2px lightseagreen;
+    background-color: rgb(19, 29, 41);
+    border-radius: 5px;
+    color: white;
+}
+
+input[type="text"] {
+    text-align: center;
+    color: greenyellow;
+
+}
+
+input[type="text"]:hover {
+    text-align: center;
+    color: lightseagreen;
+}
+
+.image-preview {
+    width: 250px;
+    height: 200px;
+}
+
+.prof_file {
+    background-color: transparent;
+    color: white;
+}
+
+#image-input {
+    /* Add some basic styling to the input field */
+    width: 200px;
+    /* adjust the width to your needs */
+    height: 55px;
+    /* adjust the height to your needs */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the "Choose file" button */
+#image-input::-webkit-file-upload-button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#image-input::-moz-file-upload-button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#image-input1 {
+    /* Add some basic styling to the input field */
+    width: 200px;
+    /* adjust the width to your needs */
+    height: 55px;
+    /* adjust the height to your needs */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the "Choose file" button */
+#image-input1::-webkit-file-upload-button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#image-input1::-moz-file-upload-button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    background-color: transparent;
+    color: lightseagreen;
+}
+
+.prof_label {
+    color: white;
+    text-align: left;
+}
+
+.form_button {
+    width: 80%;
+    background-color: lightseagreen;
+    border: none;
+    color: white;
+    border-radius: 3px;
+}

@@ -6,7 +6,7 @@ if (isset($_GET['id'])) {
 
 
 
-    $query = "SELECT admin_charges, tds, others FROM admin_charges WHERE id = 'admin'";
+    $query = "SELECT * FROM admin_charges WHERE id = 'admin'";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
 

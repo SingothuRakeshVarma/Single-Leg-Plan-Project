@@ -4,19 +4,14 @@
 // $password = "Realvisine";
 // $database = "trcelioe_user_data";
 
-$host = "localhost";
+$host = "127.0.0.1";
 $username = "root";
 $password = "";
-$database = "user_data";
+$database = "success_slp";
 
 $con = new mysqli($host, $username, $password, $database);
-
 
 if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
-
-
-
-
 ?>
