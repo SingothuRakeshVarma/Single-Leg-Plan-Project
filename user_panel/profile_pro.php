@@ -5,6 +5,7 @@ include('./header.php')
       .bi{
         font-size: 20px;
         color: lightseagreen;
+        
     }
     .pro_container{
         width: 95%;
@@ -14,7 +15,8 @@ include('./header.php')
     height: 2px;
     width: 90%;
     background-color: white;
-    margin: 0 20px 10px 20px;
+    margin: 10px 20px 10px 20px;
+
 }
 @media only screen and (min-width: 768px) {
     .pro_container{
@@ -22,8 +24,13 @@ include('./header.php')
     }
 
 }
+.pro_account_data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    }
 </style>
-<section style="width: 99%;">
+<section >
     
     <div class="pro_container">
     <h1 class="pro_acct">
@@ -31,7 +38,7 @@ include('./header.php')
     </h1>
         <div class="pro_account_data">
             <div>
-            <i class="bi bi-chevron-right"></i><samp> Profile</samp>
+            <i class="bi bi-person-bounding-box"></i><samp> Profile</samp>
             </div>
             <div>
            <a href="./profile.php"> <i class="bi bi-chevron-right"></i></a>
@@ -39,7 +46,7 @@ include('./header.php')
         </div><hr>
         <div class="pro_account_data">
             <div>
-            <i class="bi bi-chevron-right"></i><samp> Account Details</samp>
+            <i class="bi bi-bank"></i><samp> Account Details</samp>
             </div>
             <div>
             <a href="./account_details.php"><i class="bi bi-chevron-right"></i></a>
@@ -47,15 +54,15 @@ include('./header.php')
         </div><hr>
         <div class="pro_account_data">
             <div >
-            <i class="bi bi-chevron-right"></i><samp> My Referrals</samp>
+            <i class="bi bi-diagram-2"></i><samp> My Referrals</samp>
             </div>
             <div>
-            <a href="#"><i class="bi bi-chevron-right"></i></a>
+            <a href="./my_referrals.php"><i class="bi bi-chevron-right"></i></a>
             </div>
         </div><hr>
         <div class="pro_account_data">
             <div>
-            <i class="bi bi-chevron-right"></i><samp> Security</samp>
+            <i class="bi bi-house-lock"></i><samp> Security</samp>
             </div>
             <div>
             <a href="./privacy_password.php"><i class="bi bi-chevron-right"></i></a>
@@ -64,14 +71,14 @@ include('./header.php')
     </div><br>
     <div class="pro_container">
     <h1 class="pro_acct">
-         General
+         Reports
     </h1>
     <div class="pro_account_data">
             <div>
             <i class="bi bi-arrow-bar-up"></i><samp> Withdrow</samp>
             </div>
             <div>
-            <a href="./withdrow.php"><i class="bi bi-chevron-right"></i></a>
+            <a href="./withdraw_report.php"><i class="bi bi-chevron-right"></i></a>
             </div>
         </div><hr>
         <div class="pro_account_data">
@@ -79,18 +86,27 @@ include('./header.php')
             <i class="bi bi-arrow-bar-down"></i><samp> Deposit</samp>
             </div>
             <div>
-            <a href="./diposits.php"><i class="bi bi-chevron-right"></i></a>
+            <a href="./deposit_report.php"><i class="bi bi-chevron-right"></i></a>
             </div>
         </div><hr>
         <div class="pro_account_data">
             <div >
-            <i class="bi bi-arrow-down-up"></i><samp> Transfer</samp>
+            <i class="bi bi-bezier"></i><samp> Floor Report</samp>
             </div>
             <div>
-            <a href="./transfer.php"><i class="bi bi-chevron-right"></i></a>
+            <a href="./floor_report.php"><i class="bi bi-chevron-right"></i></a>
             </div>
         </div>
-    </div><br>
+    <hr>
+    <div class="pro_account_data">
+            <div >
+            <i class="bi bi-bezier2"></i><samp> SLP Report</samp>
+            </div>
+            <div>
+            <a href="./slp_report.php"><i class="bi bi-chevron-right"></i></a>
+            </div>
+        </div>
+        </div>
     <div class="pro_container">
     <h1 class="pro_acct">
          Others
@@ -113,7 +129,7 @@ include('./header.php')
         </div><hr> -->
         <div class="pro_account_data">
             <div >
-            <i class="bi bi-chevron-right"></i><samp> Privacy</samp>
+            <i class="bi bi-chevron-right"></i><samp>Team Policy</samp>
             </div>
             <div>
             <a href="#"><i class="bi bi-chevron-right"></i></a>

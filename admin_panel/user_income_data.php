@@ -282,7 +282,7 @@ include('../connect.php');
     }
    
    echo" <button onclick='nextPage()'>Next</button>
-</div><br><br><br>";
+</div><br><br><br><br><br><br>";
         }
 ?>
 
@@ -340,4 +340,69 @@ include('../connect.php');
 
     // Initial fetch for the first page
     fetchData(currentPage);
+    
+    
+        function updatePaginationButtons() {
+    const paginationContainer = document.querySelector('.pagination');
+    paginationContainer.innerHTML = ''; // Clear existing buttons
+
+    // Add the "Previous" button
+    const previousButton = document.createElement('button');
+    previousButton.textContent = 'Previous';
+    previousButton.onclick = () => goToPage(currentPage - 1);
+    previousButton.disabled = currentPage === 1; // Disable if on the first page
+    paginationContainer.appendChild(previousButton);
+
+    const maxVisibleButtons = 5; // Number of buttons to show at a time
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+
+    // Adjust the range if near the start or end
+    if (endPage - startPage + 1 < maxVisibleButtons) {
+        startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+    }
+
+    // Add ellipsis before the first button if needed
+    if (startPage > 1) {
+        const firstButton = document.createElement('button');
+        firstButton.textContent = '1';
+        firstButton.onclick = () => goToPage(1);
+        paginationContainer.appendChild(firstButton);
+
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = '...';
+        paginationContainer.appendChild(ellipsis);
+    }
+
+    // Add the main range of buttons
+    for (let i = startPage; i <= endPage; i++) {
+        const button = document.createElement('button');
+        button.textContent = i;
+        button.onclick = () => goToPage(i);
+        if (i === currentPage) {
+            button.classList.add('active'); // Highlight the current page
+        }
+        paginationContainer.appendChild(button);
+    }
+
+    // Add ellipsis after the last button if needed
+    if (endPage < totalPages) {
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = '...';
+        paginationContainer.appendChild(ellipsis);
+
+        const lastButton = document.createElement('button');
+        lastButton.textContent = totalPages;
+        lastButton.onclick = () => goToPage(totalPages);
+        paginationContainer.appendChild(lastButton);
+    }
+
+    // Add the "Next" button
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.onclick = () => goToPage(currentPage + 1);
+    nextButton.disabled = currentPage === totalPages; // Disable if on the last page
+    paginationContainer.appendChild(nextButton);
+}
+
 </script>

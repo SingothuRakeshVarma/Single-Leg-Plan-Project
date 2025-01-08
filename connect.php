@@ -1,8 +1,8 @@
 <?php 
 // $host = "localhost";
-// $username = "trcelioe_realvisinewebsite";
-// $password = "Realvisine";
-// $database = "trcelioe_user_data";
+// $username = "trcelioe_success_slp";
+// $password = "success_slp";
+// $database = "trcelioe_success_slp";
 
 $host = "127.0.0.1";
 $username = "root";

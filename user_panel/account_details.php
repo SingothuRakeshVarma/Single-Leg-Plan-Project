@@ -1,5 +1,68 @@
 <?php
-include('./header.php')
+include('./header.php');
+include('../connect.php');
+
+$user_id = $_SESSION['user_id'];
+
+if (isset($_POST['submit1'])) {
+    $trust_id = $_POST['trust_id'];
+
+    if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
+        // Get image metadata
+        $image = $_FILES['image'];
+        $imageName = $image['name'];
+        $imageType = $image['type'];
+        $imageSize = $image['size'];
+        $imagePath = './images/' . $imageName;
+        $imagePath1 = '../admin_panel/images/' . $imageName;
+        // Check if image is uploaded successfully
+        move_uploaded_file($image['tmp_name'], $imagePath);
+        copy($imagePath, $imagePath1);
+    
+        $query = "UPDATE `user_data` SET `trust_qr` = '$imagePath', trust_id = '$trust_id' WHERE `user_id` = '$user_id'";
+        $result = mysqli_query($con, $query);
+        if ($result) {
+            echo '<script>alert("Image Updated Successfully");window.location.href = "account_details.php";</script>';
+        }else{
+            echo '<script>alert("Error Occured");window.location.href = "account_details.php";</script>';
+        }
+    }
+}
+
+
+if (isset($_POST['submit2'])) {
+   $account_name = $_POST['accountname'];
+   $bank_name = $_POST['bankname'];
+   $account_number = $_POST['accountnumber'];
+   $ifsccode = $_POST['ifsccode'];
+   $transaction_pin = $_POST['tpassword'];
+
+   $qurey = "SELECT * FROM user_data WHERE user_id = ? AND tpassword = ?";
+   $stmt = $con->prepare($qurey);
+   $stmt->bind_param('ss', $user_id, $transaction_pin);
+   $stmt->execute();
+   $result = $stmt->get_result();
+
+   if ($result->num_rows > 0) {
+    $sql = "UPDATE `user_data` SET holder_name = ?, bankname = ?, account_number = ?, ifsc_code = ? WHERE user_id = ?";                                                               
+    $stmtUpdate = $con->prepare($sql);
+    $stmtUpdate->bind_param('sssss', $account_name, $bank_name, $account_number, $ifsccode, $user_id);
+
+    if ($stmtUpdate->execute()) {
+        echo '<script>alert("Account Details Updated");window.location.href = "account_details.php";</script>';
+    } else {
+        echo "Error updating record: " . $stmtUpdate->error;
+    }   
+   } else {
+    echo '<script>alert("Invalid Transaction Pin");window.location.href = "account_details.php";</script>';
+   }
+
+   $stmt->close();
+   $stmtUpdate->close();
+}
+
+
+
 ?>
 <style>
     .button-check {
@@ -20,73 +83,73 @@ include('./header.php')
         color: white;
         background-color: lightseagreen;
     }
+
 </style>
 <div>
     <p class="prof_profh1">Account Details</p>
 </div>
 <center>
-    <form style="color: white;">
+   
 
 
         <center>
 
             <div class="wall_btns">
-                <input type="button" class="button_1" id="signInLink1" value="UPI">
-                <input type="button" class="button_2" id="signUpLink1" value="Account Details">
+                <input type="button" class="button_1" id="signInLink1" value="Trust Wallet">
+                
             </div><br>
         </center>
-        <div id="signInForm1" style="display: block;">
-            <label class="prof_label">UPI ID</label><br>
-            <input type="text" class="prof_text" placeholder="Enter UPI ID"><br><br>
-            <label class="prof_label">UPI QR Code</label><br>
-            <input type="file" id="image-input" class="prof_file" name="image"><br>
-            <img id="image-preview" class="image-preview" src="" alt="Image Preview" value="" readonly>
-        </div>
-        <div id="signUpForm1" style="display: none;">
-            <label class="prof_label">Account Holder Name</label><br>
-            <input type="text" class="prof_text" placeholder="Enter Account Holder Name"><br>
-            <label class="prof_label">Bank Name</label><br>
-            <input type="text" class="prof_text" placeholder="Enter Bank Name"><br>
-            <label class="prof_label">Account Number</label><br>
-            <input type="text" class="prof_text" placeholder="Enter Account Number"><br>
-            <label class="prof_label">IFSC Code</label><br>
-            <input type="text" class="prof_text" placeholder="Enter IFSC Code"><br><br>
-        </div><br>
-        <div class="button-check-div">
-            <a href="./profile_pro.php"><button type="button" class="button-check">BACK</button></a>
-            <!-- Button trigger modal -->
-            <button type="button" class="button-check" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Update
-            </button>
 
-            <!-- Modal -->
-        </div><br><br><br>
-    </form>
-</center>
-<script>
-        const signInForm1 = document.getElementById('signInForm1');
-    const signUpForm1 = document.getElementById('signUpForm1');
-    const signUpLink1 = document.getElementById('signUpLink1');
-    const signInLink1 = document.getElementById('signInLink1');
+        <form action="account_details.php" method="post" enctype="multipart/form-data">
+            <div id="signInForm1" style="display: block;">
+                <label class="prof_label">Trust Wallet ID</label><br>
+                <input type="text" class="prof_text" name="trust_id" placeholder="Enter Trust Wallet ID"><br><br>
+                <label class="prof_label">Trust Wallet QR Code</label><br>
+                <input type="file" id="image-input" class="prof_file" name="image"><br><br>
+                <img id="image-preview" class="image-preview" src="" alt="Image Preview" value="" readonly><br><br>
 
-    signUpLink1.addEventListener('click', function(event) {
-        event.preventDefault();
-        signInForm1.style.display = 'none';
-        signUpForm1.style.display = 'block';
-        signInLink1.style.backgroundColor = 'transparent';
-        signUpLink1.style.backgroundColor = 'darkcyan';
-    });
+                <a href="./profile_pro.php"><button type="button" class="button-check">BACK</button></a>
 
-    signInLink1.addEventListener('click', function(event) {
-        event.preventDefault();
-        signInForm1.style.display = 'block';
-        signUpForm1.style.display = 'none';
-        signUpLink1.style.backgroundColor = 'transparent';
-        signInLink1.style.backgroundColor = 'darkcyan';
-    });
+                <button type="button" class="button-check" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Update
+                </button>
+            </div><br><br><br>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" style="color: black;" id="exampleModalLabel">Transaction Mathed</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+
+
+                                    <div class="modal-body">
+                                        <label for="name"  class="prof_label">Transaction Pin</label><BR>
+                                        <input type="text" class="prof_text" name="tpassword" placeholder="Enter Transaction Pin">
+
+
+                                    </div>
+                                    <div class="modal-footer">
+
+                                        <input type="submit" class="btn btn-success" name="submit1" value="submit">
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+        </form>
+        <!-- Modal -->
+
 
 
     
+</center>
+<script>
+   
     const imageInput = document.getElementById('image-input');
     const imagePreview = document.getElementById('image-preview');
 
@@ -117,8 +180,4 @@ include('./header.php')
                 console.error(error);
             });
     });
-
-   
-
-
 </script>

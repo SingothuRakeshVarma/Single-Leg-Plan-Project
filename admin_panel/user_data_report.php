@@ -148,7 +148,7 @@ include('../connect.php');
 
 
 <CENTER>
-    <h2>USER DATA</h2>
+    <h2>USER REFERRAL DATA TABLE</h2>
 </CENTER><br><br>
 <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <input type="text" name="search" placeholder="Search by name or user ID" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
@@ -158,7 +158,7 @@ include('../connect.php');
 <table id="myTable">
     <thead>
         <tr>
-            <th>SI NO</th>
+        <th>SI NO</th>
             <th>User ID</th>
             <th>User Name</th>
             <th>Mobile Number</th>
@@ -180,8 +180,8 @@ include('../connect.php');
 
         // Determine if a search was performed
         if (isset($_GET['search'])) {
-            $search = mysqli_real_escape_string($con, $_GET['search']);
-
+            $search = mysqli_real_escape_string($con, $_GET['search']) ? $_GET['search'] : '';
+            if ($search !== '') {
             // Fetch total record count
             $sql = "SELECT COUNT(*) AS total_count FROM user_data WHERE user_name LIKE '%$search%' OR user_id LIKE '%$search%'";
             $result = mysqli_query($con, $sql);
@@ -196,7 +196,7 @@ include('../connect.php');
 
             // Pagination variables
             // Pagination variables
-            $rowsPerPage = 5; // Number of records per page
+            $rowsPerPage = 15; // Number of records per page
             // $totalPages = ceil($total_records / $rowsPerPage); // Total number of pages
             $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
             // $currentPage = max(1, min($totalPages, $currentPage)); // Ensure current page is within bounds
@@ -204,12 +204,12 @@ include('../connect.php');
 
 
             // Modify the query to include the search condition
-            $query = "SELECT * FROM `user_data` WHERE user_name LIKE '%$search%' OR user_id LIKE '%$search%' LIMIT $offset, $rowsPerPage"; // SQL query with pagination and search
+            $query = "SELECT * FROM `user_data` WHERE  user_name LIKE '%$search%' OR user_id LIKE '%$search%' LIMIT $offset, $rowsPerPage"; // SQL query with pagination and search
 
             $result = mysqli_query($con, $query);
             while ($row = $result->fetch_assoc()) {
                 $user_id = $row["user_id"];
-                $bank_details = $row["bankname"] . "<br>" . $row["account_number"] . "<br>" . $row["ifsc_code"] . "<br>" . $row["holder_name"];
+                $bank_details = $row["trust_id"] . "<br>" . $row["trust_qr"];
                 $address = $row["addres"] . "<br>" . $row["district"] . "<br>" . $row["state"] . "<br>" . $row["pincode"];
     
                 echo "<tr>";
@@ -225,7 +225,7 @@ include('../connect.php');
                 echo "<td class='hedlines green1'>" . $address . " </td>";
                 echo "<td class='hedlines green1'>" . $row["joining_date"] . " </td>";
                 echo "</tr>";
-                $si_no++; // Increment the counter
+              $si_no++; // Increment the counter
             }
     
             // Free result set
@@ -233,18 +233,18 @@ include('../connect.php');
     
             // Close connection
             mysqli_close($con);
-    
-        } else {
+        }else{
+            // Fetch total record count
             include('../connect.php');
             $si_no = 1; // Initialize the SI NO counter
             // Fetch total record count
-            $sql = "SELECT COUNT(*) AS total_count FROM user_data";
+            $sql = "SELECT COUNT(*) AS total_count FROM user_data ";
             $result = mysqli_query($con, $sql);
             $count = mysqli_fetch_assoc($result);
             $total_records = $count['total_count'];
 
             // Pagination variables
-            $rowsPerPage = 5; // Number of records per page
+            $rowsPerPage = 15; // Number of records per page
             $totalPages = ceil($total_records / $rowsPerPage); // Total number of pages
             $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
             $currentPage = max(1, min($totalPages, $currentPage)); // Ensure current page is within bounds
@@ -257,7 +257,7 @@ include('../connect.php');
             $result = mysqli_query($con, $query);
             while ($row = $result->fetch_assoc()) {
                 $user_id = $row["user_id"];
-                $bank_details = $row["bankname"] . "<br>" . $row["account_number"] . "<br>" . $row["ifsc_code"] . "<br>" . $row["holder_name"];
+                $bank_details = $row["trust_id"] . "<br>" . $row["trust_qr"];
                 $address = $row["addres"] . "<br>" . $row["district"] . "<br>" . $row["state"] . "<br>" . $row["pincode"];
     
                 echo "<tr>";
@@ -273,7 +273,75 @@ include('../connect.php');
                 echo "<td class='hedlines green1'>" . $address . " </td>";
                 echo "<td class='hedlines green1'>" . $row["joining_date"] . " </td>";
                 echo "</tr>";
-                $si_no++; // Increment the counter
+              $si_no++; // Increment the counter
+            }
+            ?>
+            </tbody>
+        </table>
+        </div>
+        <div class="pagination">
+            <button onclick="previousPage()">Previous</button>
+            <?php
+        
+            // Ensure $totalPages is at least 1
+            // if ($totalPages <= 0) {
+            //     $totalPages = 1; // Set to 1 if there are no pages
+            // }
+            // Generate pagination buttons
+            for ($i = 1; $i <= $totalPages; $i++) {
+                if ($i == $currentPage) {
+                    echo "<button class='active'>$i</button>"; // Current page button
+                } else {
+                    echo "<button onclick='goToPage($i)'>$i</button>"; // Other page buttons
+                }
+            }
+           
+           echo" <button onclick='nextPage()'>Next</button>
+        </div><br><br><br><br><br>";
+                }
+        
+        
+        
+        } else {
+            include('../connect.php');
+            $si_no = 1; // Initialize the SI NO counter
+            // Fetch total record count
+            $sql = "SELECT COUNT(*) AS total_count FROM user_data";
+            $result = mysqli_query($con, $sql);
+            $count = mysqli_fetch_assoc($result);
+            $total_records = $count['total_count'];
+
+            // Pagination variables
+            $rowsPerPage = 15; // Number of records per page
+            $totalPages = ceil($total_records / $rowsPerPage); // Total number of pages
+            $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
+            $currentPage = max(1, min($totalPages, $currentPage)); // Ensure current page is within bounds
+            $startIndex = ($currentPage - 1) * $rowsPerPage; // Calculate the starting record index
+
+            $query = "SELECT * FROM `user_data` LIMIT $startIndex, $rowsPerPage"; // SQL query with pagination
+
+        
+
+            $result = mysqli_query($con, $query);
+            while ($row = $result->fetch_assoc()) {
+                $user_id = $row["user_id"];
+                $bank_details = $row["trust_id"] . "<br>" . $row["trust_qr"];
+                $address = $row["addres"] . "<br>" . $row["district"] . "<br>" . $row["state"] . "<br>" . $row["pincode"];
+    
+                echo "<tr>";
+                echo "<td class='hedlines green1'>" . $si_no  . "</td>";
+                echo "<td class='hedlines green1'>" . $user_id  . "</td>";
+                echo "<td class='hedlines green1'>" . $row["user_name"] . "</td>";
+                echo "<td class='hedlines green1'>" . $row["phone_number"] . "</td>";
+                echo "<td class='hedlines green1'>" . $row["password"] . "</td>";
+                echo "<td class='hedlines green1'>" . $row["tpassword"] . " </td>";
+                echo "<td class='hedlines green1'>" . $row["referalid"] . "</td>";
+                echo "<td class='hedlines green1'>" . $row["referalname"] . "</td>";
+                echo "<td class='hedlines green1'>" . $bank_details . "</td>";
+                echo "<td class='hedlines green1'>" . $address . " </td>";
+                echo "<td class='hedlines green1'>" . $row["joining_date"] . " </td>";
+                echo "</tr>";
+              $si_no++; // Increment the counter
             }
 
 
@@ -300,12 +368,12 @@ include('../connect.php');
     }
    
    echo" <button onclick='nextPage()'>Next</button>
-</div><br><br><br>";
+</div><br><br><br><br><br><br>";
         }
 ?>
 
 <script>
-    const rowsPerPage = 5;
+    const rowsPerPage = 15;
     let currentPage = 1;
     let totalPages = <?php echo $totalPages; ?>; // Get total pages from PHP
 
@@ -358,4 +426,68 @@ include('../connect.php');
 
     // Initial fetch for the first page
     fetchData(currentPage);
+    
+     function updatePaginationButtons() {
+    const paginationContainer = document.querySelector('.pagination');
+    paginationContainer.innerHTML = ''; // Clear existing buttons
+
+    // Add the "Previous" button
+    const previousButton = document.createElement('button');
+    previousButton.textContent = 'Previous';
+    previousButton.onclick = () => goToPage(currentPage - 1);
+    previousButton.disabled = currentPage === 1; // Disable if on the first page
+    paginationContainer.appendChild(previousButton);
+
+    const maxVisibleButtons = 5; // Number of buttons to show at a time
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+
+    // Adjust the range if near the start or end
+    if (endPage - startPage + 1 < maxVisibleButtons) {
+        startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+    }
+
+    // Add ellipsis before the first button if needed
+    if (startPage > 1) {
+        const firstButton = document.createElement('button');
+        firstButton.textContent = '1';
+        firstButton.onclick = () => goToPage(1);
+        paginationContainer.appendChild(firstButton);
+
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = '...';
+        paginationContainer.appendChild(ellipsis);
+    }
+
+    // Add the main range of buttons
+    for (let i = startPage; i <= endPage; i++) {
+        const button = document.createElement('button');
+        button.textContent = i;
+        button.onclick = () => goToPage(i);
+        if (i === currentPage) {
+            button.classList.add('active'); // Highlight the current page
+        }
+        paginationContainer.appendChild(button);
+    }
+
+    // Add ellipsis after the last button if needed
+    if (endPage < totalPages) {
+        const ellipsis = document.createElement('span');
+        ellipsis.textContent = '...';
+        paginationContainer.appendChild(ellipsis);
+
+        const lastButton = document.createElement('button');
+        lastButton.textContent = totalPages;
+        lastButton.onclick = () => goToPage(totalPages);
+        paginationContainer.appendChild(lastButton);
+    }
+
+    // Add the "Next" button
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.onclick = () => goToPage(currentPage + 1);
+    nextButton.disabled = currentPage === totalPages; // Disable if on the last page
+    paginationContainer.appendChild(nextButton);
+}
+
 </script>

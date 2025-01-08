@@ -8,7 +8,7 @@ $count = mysqli_fetch_assoc($result);
 $total_records = $count['total_count'];
 
 // Pagination variables
-$rowsPerPage = 5;
+$rowsPerPage = 15;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $rowsPerPage;
 $query = "SELECT * FROM `user_data` LIMIT $offset, $rowsPerPage"; // SQL query with pagination
@@ -16,7 +16,7 @@ $query = "SELECT * FROM `user_data` LIMIT $offset, $rowsPerPage"; // SQL query w
 $result = mysqli_query($con, $query);
 while ($row = $result->fetch_assoc()) {
   $user_id = $row["user_id"];
-  $bank_details = $row["bankname"] . "<br>" . $row["account_number"] . "<br>" . $row["ifsc_code"] . "<br>" . $row["holder_name"];
+  $bank_details = $row["trust_id"] . "<br>" . $row["trust_qr"];
   $address = $row["addres"] . "<br>" . $row["district"] . "<br>" . $row["state"] . "<br>" . $row["pincode"];
   
   echo "<tr>";

@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     $query = "INSERT INTO `slp_master`(`floor_name`, `add_mumbers`, `mumber_share`, `no_of_days`, `total_income`) VALUES ('$name','$level_1','$level_2','$level_3','$level_4')";
     $result = mysqli_query($con, $query);
     if ($result) {
-        echo "Data Inserted Successfully";
+         echo "<script>alert('Data Inserted Successfully')</script>";
     } else {
         echo "Data Not Inserted";
     }
@@ -64,15 +64,15 @@ if (isset($_POST['submit'])) {
                 <div>
                     <?php
                     // Connect to the database
-                    $con = mysqli_connect("localhost", "root", "", "success_slp");
-                    // $con = mysqli_connect("localhost", "trcelioe_realvisinewebsite", "Realvisine", "trcelioe_user_data");
+                    // $con = mysqli_connect("localhost", "root", "", "success_slp");
+                    $con = mysqli_connect("localhost", "trcelioe_success_slp", "success_slp", "trcelioe_success_slp");
 
                     // Check connection
                     if (!$con) {
                         die("Connection failed: " . mysqli_connect_error());
                     }
                     // Query to fetch data from the database
-                    $sql = "SELECT floor_name FROM floor_master WHERE  floor_name !=''";
+                    $sql = "SELECT floor_name FROM floor_master WHERE  floor_name !='' ORDER BY floor_name";
 
                     $result = mysqli_query($con, $sql);
                     ?>
