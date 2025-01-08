@@ -1,18 +1,17 @@
 <?php
 // Connect to the database
+// $conn = mysqli_connect("localhost", "trcelioe_success_slp", "success_slp", "trcelioe_success_slp");
 $conn = mysqli_connect("localhost", "root", "", "success_slp");
-// $conn = new mysqli("localhost", "trcelioe_realvisinewebsite", "Realvisine", "trcelioe_user_data");
-
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 
 // Get category from GET request
 $q = filter_input(INPUT_GET, 'q', FILTER_SANITIZE_STRING);
 
 // Prepare SQL query
-$sql = "SELECT DISTINCT * FROM floor_master WHERE floor_name = ?";
+$sql = "SELECT total, validity_days, floor_id FROM floor_master WHERE floor_name = ?";
 
 // Prepare statement
 $stmt = $conn->prepare($sql);
@@ -24,24 +23,25 @@ $stmt->execute();
 // Get result
 $result = $stmt->get_result();
 
-// Fetch all rows
-$rows = $result->fetch_all(MYSQLI_ASSOC);
-
-$productDetails = array();
-
-// Loop through the rows and display the data
-foreach ($rows as $row) {
-    $productDetails[] = array(
-        'flooramount' => $row['total'],
-        'flooralgibulity' => $row['validity_days'],
-        'productcode' => $row['floor_id'],
-
-    );
-}
+// Fetch the row
+$productDetails = $result->fetch_assoc();
 
 // Close statement and connection
 $stmt->close();
 $conn->close();
 
-echo json_encode($productDetails[0]); // Return the first row as JSON
+// Return JSON response
+if ($productDetails) {
+    echo json_encode(array(
+        'flooramount' => $productDetails['total'],
+        'flooralgibulity' => $productDetails['validity_days'],
+        'productcode' => $productDetails['floor_id']
+    ));
+} else {
+    echo json_encode(array(
+        'flooramount' => '',
+        'flooralgibulity' => '',
+        'productcode' => ''
+    ));
+}
 ?>

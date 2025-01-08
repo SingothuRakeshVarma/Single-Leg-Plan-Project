@@ -85,8 +85,8 @@ if (isset($_POST['submit'])) {
                 <div>
                     <?php
                     // Connect to the database
-                    $con = mysqli_connect("localhost", "root", "", "success_slp");
-                    // $con = mysqli_connect("localhost", "trcelioe_realvisinewebsite", "Realvisine", "trcelioe_user_data");
+                    // $con = mysqli_connect("localhost", "root", "", "success_slp");
+                   $con = mysqli_connect("localhost", "trcelioe_success_slp", "success_slp", "trcelioe_success_slp");
 
                     // Check connection
                     if (!$con) {

@@ -66,7 +66,7 @@ th, td {
 </style>
 
 
-<CENTER><h2>UPGRADE INCOME MASTER</h2></CENTER>
+<CENTER><h2>SLP MASTER TABLE</h2></CENTER>
 
 <table id="myTable">
   <thead>

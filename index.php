@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
     $referalid = mysqli_real_escape_string($con, $_POST["reffid"]);
     $referalname = mysqli_real_escape_string($con, $_POST["referral_name"]);
 
-
+    echo "phonenumber: " . $phonenumber;
 
     function generate_user_id($length = 6)
     {
@@ -89,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
                      <p>User Id: ' . $user_id . '</p>
                      <p>User Name: ' . $username . '</p>
                      <p>Password: ' . $password . '</p>
+                     <p>Mobile Number: ' . $phonenumber . '</p>
                      <button onclick="window.location.href = \'index.php\';">OK</button>
                  </div>';
             } else {
@@ -112,7 +113,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>header</title>
+    <title>Successslp</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./images/SLP LOGO- 1.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -122,6 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="./user_panel/styles.css">
+    
 
     <style>
         .alert-box {
@@ -277,19 +280,109 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
             text-align: center;
             color: lightseagreen;
         }
+
+        .loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('./images/SLP\ LOGO-\ 1.png') no-repeat center center;
+            background-size: 300px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2em;
+         
+            /* Blur effect */
+            transition: filter 0.3s ease;
+            z-index: 999
+            /* High z-index to stay on top */
+        }
+
+        #mainContent {
+            display: none;
+            /* Initially hidden */
+        }
+
+        #dots {
+            display: inline-block;
+        }
+
+        .loading_text {
+            font-size: 1.5em;
+            position: relative;
+            top: 20%;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .logo_img {
+        width: 60%;
+        height: 40%;
+       
+    }
+    
+/*    .profile_imag {*/
+/*    border-radius: 0%;*/
+/*    width: 70%;*/
+/*    height: 70%;*/
+
+/*    z-index: 1;*/
+
+    /* Key change! */
+/*}*/
     </style>
+      
 </head>
 
 <body>
+    <div class="loading-container" id="loadingScreen">
+        <div class="loading_text">SuccessSLP<span id="dots">...</span></div>
+    </div>
+ <script>
+         document.addEventListener("DOMContentLoaded", function() {
+            // Simulate loading for 3 seconds
+            setTimeout(function() {
+                // Hide the loading screen
+                document.getElementById('loadingScreen').style.display = 'none';
+                // Show the main content
+                document.getElementById('mainContent').style.display = 'block';
+            }, 4000); // Adjust the time as needed
+        });
+        // Function to update the dots animation
+        let dotCount = 0;
+        const maxDots = 3;
+        const dotElement = document.getElementById('dots');
+
+        function updateDots() {
+            dotCount = (dotCount + 1) % (maxDots + 1);
+            dotElement.textContent = '.'.repeat(dotCount);
+        }
+
+        // Start dots animation every 500ms
+        setInterval(updateDots, 500);
+
+        // Call the function to start the delay
+        showContentAfterDelay();
+    </script>
+    <!-- <div id="loadingScreen">
+        <video id="myVideo" width="100%" controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div> -->
     <section>
         <div class="container_head">
             <div>
 
-                <p class="username"><img src="./images/LOGO 1.png" class="logo_img">
+                <p class="username"><img src="./images/SLP LOGO- 1.png" class="logo_img">
             </div>
             <div>
-                <img class="profile_imag " src="./images/360_F_571067620_JS5T5TkDtu3gf8Wqm78KoJRF1vobPvo6.jpg"
-                    alt="profil_img">
+<!--                <video class="profile_video" controls>-->
+<!--    <source src="./images/WhatsApp Video 2024-12-01 at 14.20.27_c50f3d02.mp4" type="video/mp4">-->
+   
+<!--</video>-->
             </div>
         </div>
 
@@ -299,12 +392,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
             <div>
                 <center>
                     <div class="">
-                        <input type="button" class="button_1" id="signInLink" value="Log In">
-                        <input type="button" class="button_2" id="signUpLink" value="Sing Up">
+                        <input type="button" class="button_1" id="signInLink" value="LogIn">
+                        <input type="button" class="button_2" id="signUpLink" value="SignUp">
 
 
                     </div><br><br>
-                    <form action="loginpage.php" id="signInForm" method="post" class="">
+                    <form action="loginpage.php" id="signInForm" method="post">
                         <div class="form-group">
                             <label for="username" class="prof_label">Username:</label><br>
                             <input type="text" id="username" name="username" class="prof_text" style="width: 62%;" required>
@@ -319,7 +412,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
                             </div>
                         </div><br><br>
                         <div class="form-group">
-                            <button type="submit" class="button-check" name="submit">Log In</button>
+                            <input type="submit" class="button-check" name="submit" value="Log In"><br>
                             </br>
                             </br>
 
@@ -331,12 +424,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
                     <form class="Register-details" id="signUpForm" style="display: none;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="fullName" class="prof_label">Full Name:</label><br>
-                            <input type="text" id="username" class="prof_text" name="username" style="width: 60%;" required>
+                            <input type="text" id="username" class="prof_text" name="username" style="width: 60%;" maxlength="15" required>
                         </div>
 
                         <div class="form-group">
                             <label for="number" class="prof_label">Mobile Number:</label><br>
-                            <input type="mobile" name="phonenumber" class="prof_text" id="phonenumber" style="width: 60%;" maxlength="10" minlength="required(10)" required />
+                            <input type="mobile" name="phonenumber" class="prof_text" style="width: 60%;" maxlength="10" minlength="required(10)" required />
                         </div>
                         <div class="form-group">
                             <label for="password" class="prof_label">Password:</label><br>
@@ -355,7 +448,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
                             <input type="text" id="referral_name" class="prof_text" name="referral_name" style="width: 60%;" readonly>
                         </div><br>
                         <div class="submit-login">
-                            <input type="checkbox" class="check" class="prof_text" required><span class="span_check">Your Agree On Our</span><a href="#"> Privacy Policy for REALVISIONE</a>
+                            <input type="checkbox" class="check" class="prof_text" required><span class="span_check">Your Agree On Our</span><a href="#"> Privacy Policy for SUCCESSSLP</a>
                         </div><br>
                         <div>
                             <button type="submit" class="button-check green" name="register" value="submit">Register</button>
@@ -368,6 +461,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
         </div>
     </section>
     <script>
+       
+
         function togglePassword() {
             var passwordInput = document.getElementById("password");
             var eyeIcon = document.getElementById("eye-icon");
@@ -424,7 +519,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
             form.requestSubmit();
         });
 
-        function fetchReferralName(referral_id) {
+function fetchReferralName(referral_id) {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'fetch_referral_name.php?id=' + referral_id, true);
             xhr.onload = function() {
@@ -434,6 +529,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"  && isset($_POST["register"])) {
             };
             xhr.send();
         }
+       
     </script>
 
 </body>
